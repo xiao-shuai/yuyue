@@ -13,6 +13,8 @@ import Route from './src/router/route'
 import {Provider} from 'mobx-react';
 import store from './src/mobx/index'
 type Props = {};
+
+console.disableYellowBox=true
 export default class App extends Component<Props> {
   render() {
     return (

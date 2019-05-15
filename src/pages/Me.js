@@ -11,6 +11,7 @@ import {View,
     ProgressViewIOS
 } from 'react-native'
 import {SafeAreaView} from 'react-navigation'
+import {abc} from '../styles/Met'
 class Me extends Component{
    constructor(props){
        super(props)
@@ -18,11 +19,17 @@ class Me extends Component{
 
        }
    }
-
+   
    render(){
       return(
-          <SafeAreaView>
-              <Text>Me33</Text>
+          <SafeAreaView style={{flex:1}}>
+          <View style={{width:abc.w,height:abc.h*.1,backgroundColor:abc.themeColor}}>
+          <Text>New booking</Text>
+          </View>
+          <ScrollView>
+
+          </ScrollView>
+            
           </SafeAreaView>
       )
    }

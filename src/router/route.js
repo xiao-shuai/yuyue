@@ -6,12 +6,13 @@ import {
     } from 'react-navigation';
  
  import  Ionicons  from 'react-native-vector-icons/Ionicons' 
- import  {Me,Home,Homexq} from  '../pages/all'
+ import  {Me,Home,Homexq,Contact} from  '../pages/all'
  import {abc} from  '../styles/Met'
 
  const DiBu=createBottomTabNavigator(
     {
         Home:Home,
+        Contact:Contact,
         Me:Me,
         
       },
@@ -23,7 +24,10 @@ import {
               let aaaiconName;
               if (errrrouteName === 'Home') {
                 aaaiconName ='ios-home';
-                } else{
+                }else if(errrrouteName==='Contact'){
+                  aaaiconName ='ios-home';
+                }
+                 else{
                     aaaiconName='ios-person'
                 }
                 return <Ionicons name={aaaiconName} size={horizontal ? 20 : 25} 
