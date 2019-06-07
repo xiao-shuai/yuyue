@@ -6,7 +6,9 @@ import {
     } from 'react-navigation';
  
  import  Ionicons  from 'react-native-vector-icons/Ionicons' 
- import  {Me,Home,Homexq,Contact} from  '../pages/all'
+ import  {Me,Home,Homexq,Contact,Order,
+  Fank,Use
+} from  '../pages/all'
  import {abc} from  '../styles/Met'
 
  const DiBu=createBottomTabNavigator(
@@ -14,7 +16,6 @@ import {
         Home:Home,
         Contact:Contact,
         Me:Me,
-        
       },
       {
        initialRouteName: 'Home',
@@ -54,7 +55,26 @@ import {
         navigationOptions:()=>({
             title:'Detail'
         })
-      }
+      },
+      Order:{
+        screen:Order,
+        navigationOptions:()=>({
+            title:'Order List'
+        })
+      },
+      Fank:{
+        screen:Fank,
+        navigationOptions:()=>({
+            title:'Feedback'
+        })
+      },
+      Use:{
+        screen:Use,
+        navigationOptions:()=>({
+            title:'Directions for use'
+        })
+      },
+
  })
 
  export default createAppContainer(Route)

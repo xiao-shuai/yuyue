@@ -29,8 +29,21 @@ class Home extends Component{
          color:abc.themeColor,
          color2:abc.themehui2,
          color3:abc.themehui2,
+         b_index:0,
          
        }
+       this.dalou=[
+         {
+           name:'A'
+         },
+         {
+          name:'B'
+        },
+        {
+          name:'C'
+        },
+
+       ]
    }
 
   today=()=>{
@@ -42,6 +55,9 @@ class Home extends Component{
     const aaafinal=fyear+'-'+fmonth+'-'+fday
     this.setState({date:aaafinal,date2:aaafinal})
   } 
+  build=(item,index)=>{
+       this.setState({b_index:index})
+  }
    componentDidMount(){
      this.today()
    }
@@ -175,7 +191,20 @@ class Home extends Component{
                 {/* <Text style={{fontSize:abc.w*.05,fontWeight:'600',}}>:</Text> */}
             </View> 
             <View style={{ width:'75%',flexDirection:'row',justifyContent:'space-around'}}>
-               <Avatar title={'A'} rounded  overlayContainerStyle={{
+              {
+                this.dalou.map((item,index)=>{
+                   return(
+                    <Avatar title={item.name} rounded onPress={()=>{
+                     this.build(item,index)
+                     }} overlayContainerStyle={{
+                         backgroundColor: this.state.b_index==index?abc.themeColor:abc.themehui
+
+                    }}/>
+                   )
+
+                  })
+              }
+               {/* <Avatar title={'A'} rounded  overlayContainerStyle={{
                  backgroundColor:this.state.color
                }}  onPress={()=>{
                   this.setState({
@@ -195,7 +224,7 @@ class Home extends Component{
                 })
                 }} overlayContainerStyle={{
                  backgroundColor:this.state.color3
-               }} />
+               }} /> */}
             </View>
            </View>
            {/* 备注 */}

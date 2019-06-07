@@ -8,7 +8,8 @@ import {View,
     StyleSheet,
     ActivityIndicator,
     RefreshControl,
-    ProgressViewIOS
+    ProgressViewIOS,Linking
+
 } from 'react-native'
 import {SafeAreaView} from 'react-navigation'
 import {abc} from '../styles/Met'
@@ -20,6 +21,24 @@ class Contact  extends Component{
        this.state={
   
        }
+       this.qwr=[
+           {
+               title:'Address',
+               content:'41 kexing west road, huilongguan street, Beijing'
+           },
+           {
+               title:'Telephone',
+               content:'+8613478654675',
+           },
+           {
+               title:'Email',
+               content:'13478654675@makepolo.com',
+           },
+           {
+               title:'Open time',
+               content:'Monday to Friday,9:00-6:00'
+           }
+       ]
    }
  
    render(){
@@ -27,8 +46,8 @@ class Contact  extends Component{
           <SafeAreaView style={{flex:1}}>
              <View style={styles.title}>
           <Text style={{fontSize:abc.w*.1,color:abc.themebai,}}>Contact</Text>
-          </View>
-
+            </View>
+         <ScrollView> 
           <MapView 
           style={styles.dt}
           initialRegion={{
@@ -44,13 +63,38 @@ class Contact  extends Component{
             }}>
             <Callout style={styles.aacallout} >
              <View style={{}}>
-                <Text>JunWei </Text>
+                <Text>Beijing HuiLongGuan street </Text>
              </View>
             </Callout>
-
           </Marker>
-
           </MapView>
+          {
+            this.qwr.map((item,index)=>{
+              return(
+                  <View style={{marginTop:10}}>
+                 <View style={{width:'100%',height:abc.h*.05,backgroundColor:abc.themeColor,justifyContent:'center'}}>
+                     <Text style={{color:'white',fontSize:abc.w*.05,fontWeight:'600',marginLeft:'5%'}}>{item.title}</Text>
+                 </View>
+                 {
+                     index==1?
+                     <TouchableOpacity style={{padding:abc.w*.05}} onPress={()=>{
+                        Linking.openURL('tel:+8613478654675')
+                     }}>
+                     <Text style={{fontSize:abc.w*.04,fontWeight:'500'}}>{item.content}</Text>
+                    
+                     </TouchableOpacity>
+                  :
+                  <View style={{padding:abc.w*.05}}>
+                  <Text style={{fontSize:abc.w*.04,fontWeight:'500'}}>{item.content}</Text>
+                 </View>
+                 }
+                
+                  </View>
+              )
+            })
+          }
+           </ScrollView>
+          
           </SafeAreaView>
       )
    }
