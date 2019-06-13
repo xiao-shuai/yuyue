@@ -17,6 +17,7 @@ import {abc} from '../styles/Met'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import DatePicker from 'react-native-datepicker';
 import {Avatar,Badge,Button} from 'react-native-elements'
+import Toast from 'react-native-easy-toast'
 
 @inject('DataStore')
 @observer
@@ -30,22 +31,29 @@ class Fank extends Component{
        
    }
 
-  today=()=>{
-    const date = new Date();
-    
-    const fyear = date.getFullYear().toString();
-    const fmonth = (date.getMonth()+1).toString();
-    const fday = date.getDate().toString();
-    const aaafinal=fyear+'-'+fmonth+'-'+fday
-    this.setState({date:aaafinal,date2:aaafinal})
-  } 
-  build=(item,index)=>{
-       this.setState({b_index:index})
-  }
+  
    componentDidMount(){
-     this.today()
+     
    }
+go_submit=()=>{
+  if(this.state.text.length!==0){
+      fetch('https://easy-mock.com/mock/5d0106967850e766d04c7898/booking/fankui',{
+        method:'POST'
+      })
+      .then(res=>res.json())
+      .then(res=>{
+        console.log('res!',res)
+        this.refs.Toast.show('Thank you for your feedback. We will deal with it as soon as possible',1000) 
+      })
+      .catch(err=>{
+        console.log('err:',err)
+      })
 
+  }else{
+    this.refs.Toast.show('The content cannot be empty',1000) 
+  }
+  
+}
    render(){
       
       return(
@@ -67,9 +75,15 @@ class Fank extends Component{
             }} 
              title={'Submit'} titleStyle={{}}
               onPress={()=>{
+               this.go_submit()
 
              }}/>
           </ScrollView> 
+     <Toast
+ref="Toast"
+position='top'
+opacity={0.8}
+/>
           </SafeAreaView>
       )
    }
@@ -77,6 +91,7 @@ class Fank extends Component{
 
 export default Fank
 const styles=StyleSheet.create({
+
   left_text:{
     fontSize:abc.w*.04,fontWeight:'600',marginLeft:5
   },

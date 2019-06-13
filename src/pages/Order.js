@@ -9,14 +9,15 @@ import {View,
     ActivityIndicator,
     RefreshControl,
     ProgressViewIOS,
-    TextInput
+    TextInput,
+    SafeAreaView
 } from 'react-native'
-import {SafeAreaView} from 'react-navigation'
+import {} from 'react-navigation'
 import {observer,inject} from 'mobx-react';
 import {abc} from '../styles/Met'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import DatePicker from 'react-native-datepicker';
-import {Avatar,Badge} from 'react-native-elements'
+import {Avatar,Badge, Button} from 'react-native-elements'
 
 @inject('DataStore')
 @observer
@@ -50,7 +51,26 @@ class Order extends Component{
       
       return(
           <SafeAreaView style={{flex:1}}>
-         
+            <View style={{flex:1,backgroundColor:'#F5F5F5',
+            alignItems:'center',
+            marginTop:10
+            }}>
+            <View style={{
+              width:abc.w*.95,
+              padding:10,
+              shadowColor:abc.themeColor,
+              // shadowOffset:{width:5,height:5},
+              shadowOpacity:.8,
+              backgroundColor:'white'
+              
+              }}>
+              <Text style={styles.text2}>Name: Tom</Text>
+              <Text style={styles.text2}>Company: ABC</Text>
+              <Text style={styles.text2}>Phone: 19987634567</Text>
+              <Text style={styles.text2}>StartTime: 2019-5-1</Text>
+              <Text style={styles.text2}>EndTime: 2019-5-5</Text>
+            </View>
+            </View>
           </SafeAreaView>
       )
    }
@@ -58,6 +78,9 @@ class Order extends Component{
 
 export default Order
 const styles=StyleSheet.create({
+  text2:{
+    fontSize:abc.w*.05,marginTop:5,color:abc.themehui2
+  },
   left_text:{
     fontSize:abc.w*.04,fontWeight:'600',marginLeft:5
   },

@@ -13,6 +13,7 @@ import {View,
 import {SafeAreaView} from 'react-navigation'
 import  Ionicons  from 'react-native-vector-icons/Ionicons' 
 import {abc} from '../styles/Met'
+import { Button } from 'react-native-elements';
 class Me extends Component{
    constructor(props){
        super(props)
@@ -21,13 +22,19 @@ class Me extends Component{
        }
        this.aaa=[
         {
-          title:'My order',
+          title:'My booking',
           item_page:'Order'
         }, 
         {
             title:'Feedback',
             item_page:'Fank'
         },
+        {
+            title:'About us',
+            item_page:'About', 
+        },
+      
+
         // {
         //     title:'Directions for use',
         //     item_page:''
@@ -36,6 +43,10 @@ class Me extends Component{
        ]
    }
    
+  exit=()=>{
+      this.props.navigation.navigate('Login')
+      AsyncStorage.removeItem('yes')
+  } 
    render(){
       return(
           <SafeAreaView style={{flex:1}}>
@@ -63,18 +74,23 @@ class Me extends Component{
           {
               this.aaa.map((item,index)=>{
                return(
-                   <TouchableOpacity style={styles.item} onPress={()=>{
+                   <TouchableOpacity style={styles.item} key={index} onPress={()=>{
+
                        this.props.navigation.navigate(item.item_page)
                    }}>
                        <Text style={{fontSize:abc.w*.05}}>
                        {item.title}
                        </Text>
-                  <Ionicons name={'ios-arrow-forward'} style={{fontSize:abc.w*.06,color:abc.themehui}}/>
+                   <Ionicons name={'ios-arrow-forward'} style={{fontSize:abc.w*.06,color:abc.themehui}}/>
                    </TouchableOpacity>
                )
               })
           }
-        
+          <Button  title={'Exit'} style={{marginTop:20}}buttonStyle={{
+              backgroundColor:abc.themeColor
+          }} onPress={()=>{
+                this.exit()
+          }}/>
           </ScrollView>
             
           </SafeAreaView>

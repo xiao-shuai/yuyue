@@ -7,7 +7,7 @@ import {
  
  import  Ionicons  from 'react-native-vector-icons/Ionicons' 
  import  {Me,Home,Homexq,Contact,Order,
-  Fank,Use
+  Fank,Use,About,Login
 } from  '../pages/all'
  import {abc} from  '../styles/Met'
 
@@ -59,7 +59,7 @@ import {
       Order:{
         screen:Order,
         navigationOptions:()=>({
-            title:'Order List'
+            title:'Booking List'
         })
       },
       Fank:{
@@ -72,6 +72,19 @@ import {
         screen:Use,
         navigationOptions:()=>({
             title:'Directions for use'
+        })
+      },
+      About:{
+        screen:About,
+        navigationOptions:()=>({
+            title:'About us'
+        })
+      },
+      Login:{
+        screen:Login,
+        navigationOptions:()=>({
+            // title:'About us'
+            header:null
         })
       },
 

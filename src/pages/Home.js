@@ -11,7 +11,7 @@ import {View,
     ProgressViewIOS,
     TextInput
 } from 'react-native'
-import {SafeAreaView} from 'react-navigation'
+import {SafeAreaView,NavigationActions} from 'react-navigation'
 import {observer,inject} from 'mobx-react';
 import {abc} from '../styles/Met'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
@@ -61,6 +61,17 @@ class Home extends Component{
    componentDidMount(){
      this.today()
    }
+   componentWillMount(){
+     AsyncStorage.getItem('yes').then(res=>{
+        console.log('yes:',res)
+        if(res==null){
+          this.props.navigation.reset([NavigationActions.navigate({ routeName: 'Login' })], 0)
+        }
+     }
+     ).catch(errr=>{
+       
+     })
+   }
   //  shouldComponentUpdate(){}
    render(){
       console.log('date!!',this.state.date)
@@ -93,8 +104,24 @@ class Home extends Component{
             </View> 
             <View style={{ width:'75%'}}>
               <TextInput placeholder="Please enter your name" style={styles.text}
-              onChangeText={(who)=>{
-                this.setState({who})
+              onChangeText={(name)=>{
+                this.setState({name})
+              }}
+              />
+            </View>
+           </View>
+           {/*  */}
+           {/*  */}
+           <View style={styles.wai}>
+            <View style={styles.nei}>
+
+                <Text style={styles.left_text}>Phone</Text>
+             
+            </View> 
+            <View style={{ width:'75%'}}>
+              <TextInput placeholder="Please enter your phone" style={styles.text}
+              onChangeText={(phone)=>{
+                this.setState({phone})
               }}
               />
             </View>
@@ -108,8 +135,8 @@ class Home extends Component{
             </View> 
             <View style={{ width:'75%'}}>
               <TextInput placeholder="Please enter your Address" style={styles.text}
-              onChangeText={(who)=>{
-                this.setState({who})
+              onChangeText={(Address)=>{
+                this.setState({Address})
               }}
               />
             </View>
@@ -194,7 +221,7 @@ class Home extends Component{
               {
                 this.dalou.map((item,index)=>{
                    return(
-                    <Avatar title={item.name} rounded onPress={()=>{
+                    <Avatar title={item.name} key={index} rounded onPress={()=>{
                      this.build(item,index)
                      }} overlayContainerStyle={{
                          backgroundColor: this.state.b_index==index?abc.themeColor:abc.themehui
@@ -204,27 +231,7 @@ class Home extends Component{
 
                   })
               }
-               {/* <Avatar title={'A'} rounded  overlayContainerStyle={{
-                 backgroundColor:this.state.color
-               }}  onPress={()=>{
-                  this.setState({
-                    color:this.state.color==abc.themeColor?abc.themehui2:abc.themeColor
-                  })
-                 }}/>
-               <Avatar title={'B'} rounded onPress={()=>{
-                 this.setState({
-                  color2:this.state.color2==abc.themeColor?abc.themehui2:abc.themeColor
-                })
-                }} overlayContainerStyle={{
-                 backgroundColor:this.state.color2
-               }}/>
-               <Avatar title={'C'} rounded onPress={()=>{
-                 this.setState({
-                  color3:this.state.color3==abc.themeColor?abc.themehui2:abc.themeColor
-                })
-                }} overlayContainerStyle={{
-                 backgroundColor:this.state.color3
-               }} /> */}
+               
             </View>
            </View>
            {/* 备注 */}
@@ -238,8 +245,8 @@ class Home extends Component{
             <View style={{ width:'75%'}}>
               <TextInput placeholder="Please enter remarks (optional)" style={{}}
               multiline={true}
-              onChangeText={(who)=>{
-                this.setState({who})
+              onChangeText={(note)=>{
+                this.setState({note})
               }}
               />
             </View>
