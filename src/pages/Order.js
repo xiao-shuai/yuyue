@@ -45,31 +45,48 @@ class Order extends Component{
   }
    componentDidMount(){
      this.today()
+     console.log('aa',this.props.DataStore.order)
    }
 
    render(){
+     const list=this.props.DataStore.order
       
       return(
           <SafeAreaView style={{flex:1}}>
             <View style={{flex:1,backgroundColor:'#F5F5F5',
             alignItems:'center',
-            marginTop:10
+            // marginTop:10
             }}>
-            <View style={{
-              width:abc.w*.95,
-              padding:10,
-              shadowColor:abc.themeColor,
-              // shadowOffset:{width:5,height:5},
-              shadowOpacity:.8,
-              backgroundColor:'white'
-              
+              <ScrollView contentContainerStyle={{
+                marginTop:10
               }}>
-              <Text style={styles.text2}>Name: Tom</Text>
-              <Text style={styles.text2}>Company: ABC</Text>
-              <Text style={styles.text2}>Phone: 19987634567</Text>
-              <Text style={styles.text2}>StartTime: 2019-5-1</Text>
-              <Text style={styles.text2}>EndTime: 2019-5-5</Text>
-            </View>
+                {
+                  list.map((item,index)=>{
+                    return (
+                      <View style={{
+                        width:abc.w*.95,
+                        padding:10,
+                        shadowColor:abc.themeColor,
+                        // shadowOffset:{width:5,height:5},
+                        shadowOpacity:.8,
+                        backgroundColor:'white'
+                        
+                        }}>
+                        <Text style={styles.text2}>Name: {item.name}</Text>
+                        <Text style={styles.text2}>Company: {item.company}</Text>
+                        <Text style={styles.text2}>Address: {item.address}</Text>
+                        <Text style={styles.text2}>Phone: {item.phone}</Text>
+                        <Text style={styles.text2}>StartTime: {item.start_time}</Text>
+                        <Text style={styles.text2}>EndTime: {item.end_time}</Text>
+                      </View>
+                    )
+                  })
+                  
+                }
+
+           
+
+            </ScrollView>
             </View>
           </SafeAreaView>
       )

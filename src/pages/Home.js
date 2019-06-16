@@ -9,7 +9,8 @@ import {View,
     ActivityIndicator,
     RefreshControl,
     ProgressViewIOS,
-    TextInput
+    TextInput,
+    Alert
 } from 'react-native'
 import {SafeAreaView,NavigationActions} from 'react-navigation'
 import {observer,inject} from 'mobx-react';
@@ -58,6 +59,45 @@ class Home extends Component{
   build=(item,index)=>{
        this.setState({b_index:index})
   }
+  submit=()=>{
+    
+    if(this.state.name==undefined){
+      return  Alert.alert('prompt','Please enter name')
+    }if(this.state.company==undefined){
+      return  Alert.alert('prompt','Please enter Company')
+    }if(this.state.phone==undefined){
+      return  Alert.alert('prompt','Please enter phone')
+    }if(this.state.address==undefined){
+      return  Alert.alert('prompt','Please enter Address')
+    }
+    fetch('https://easy-mock.com/mock/5d0106967850e766d04c7898/booking/fankui',{
+      method:'POST'
+    }).then(res=>res.json()).then(res=>{
+      
+    }
+    ).catch(err=>{
+
+    }) 
+    let qwe={
+      name:this.state.name,
+      company:this.state.company,
+      address:this.state.address,
+      phone:this.state.phone,
+      start_time:this.state.date,
+      end_time:this.state.date2,
+      build:'A',
+      note:'',
+    }
+    const mbx=this.props.DataStore.order
+      mbx.unshift(qwe) 
+      Alert.alert('prompt','Reservation successful, go to check?',[
+        {'text':'Cancel','onPress':()=>{}},
+        {'text':'OK','onPress':()=>{
+          this.props.navigation.navigate('Order')
+        }}
+      ])
+
+  }
    componentDidMount(){
      this.today()
    }
@@ -88,9 +128,9 @@ class Home extends Component{
                 {/* <Text style={{fontSize:abc.w*.05,fontWeight:'600'}}>:</Text> */}
             </View> 
             <View style={{ width:'75%'}}>
-              <TextInput placeholder="Please enter your name" style={styles.text}
-              onChangeText={(who)=>{
-                this.setState({who})
+              <TextInput placeholder="Please enter your name1" style={styles.text}
+              onChangeText={(name)=>{
+                this.setState({name})
               }}
               />
             </View>
@@ -103,9 +143,9 @@ class Home extends Component{
                 {/* <Text style={{fontSize:abc.w*.05,fontWeight:'600',}}>:</Text> */}
             </View> 
             <View style={{ width:'75%'}}>
-              <TextInput placeholder="Please enter your name" style={styles.text}
-              onChangeText={(name)=>{
-                this.setState({name})
+              <TextInput placeholder="Please enter your company" style={styles.text}
+              onChangeText={(company)=>{
+                this.setState({company})
               }}
               />
             </View>
@@ -135,8 +175,8 @@ class Home extends Component{
             </View> 
             <View style={{ width:'75%'}}>
               <TextInput placeholder="Please enter your Address" style={styles.text}
-              onChangeText={(Address)=>{
-                this.setState({Address})
+              onChangeText={(address)=>{
+                this.setState({address})
               }}
               />
             </View>
@@ -255,7 +295,7 @@ class Home extends Component{
          <Badge value={'submit'} badgeStyle={{width:abc.w*.95,height:50,marginTop:10,backgroundColor:abc.themeColor}}
             textStyle={{fontSize:abc.w*.05}}
            onPress={()=>{
-              alert(4)
+             this.submit()
             }}
          />
           </KeyboardAwareScrollView>

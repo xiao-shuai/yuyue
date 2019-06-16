@@ -14,6 +14,10 @@ import {SafeAreaView} from 'react-navigation'
 import  Ionicons  from 'react-native-vector-icons/Ionicons' 
 import {abc} from '../styles/Met'
 import { Button } from 'react-native-elements';
+import {observer,inject} from 'mobx-react';
+
+@inject('DataStore')
+@observer
 class Me extends Component{
    constructor(props){
        super(props)

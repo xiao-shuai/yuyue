@@ -21,19 +21,19 @@ import {
        initialRouteName: 'Home',
        defaultNavigationOptions:({ navigation })=>({
            tabBarIcon:({focused, horizontal, tintColor})=>{
-              const { errrrouteName } = navigation.state;
-              let aaaiconName;
-              if (errrrouteName === 'Home') {
-                aaaiconName ='ios-home';
-                }else if(errrrouteName==='Contact'){
-                  aaaiconName ='ios-home';
-                }
-                 else{
-                    aaaiconName='ios-person'
-                }
-                return <Ionicons name={aaaiconName} size={horizontal ? 20 : 25} 
-            color={focused?abc.themeColor:abc.themehui} />;
-           }
+          
+          const { routeName } = navigation.state;
+           let iconName;
+           if (routeName === 'Home') {
+               iconName ='ios-home';
+             } else if (routeName === 'Contact') {
+               iconName = 'ios-business';
+             }else{
+                 iconName='ios-person'
+             }
+             return  <Ionicons name={iconName} size={horizontal ? 20 : 25} 
+         color={focused?abc.themeColor:abc.themehui} />;
+        }
        }),
        tabBarOptions: {
           activeTintColor:abc.themeColor,
