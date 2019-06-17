@@ -56,9 +56,8 @@ class About extends Component{
                padding:10,height:abc.h*.6,
               backgroundColor:'white',marginTop:abc.w*.06}}>
                <Text style={{color:abc.themehui2,fontSize:abc.w*.05,
-               lineHeight:abc.w*.07,letterSpacing:1
-              }}>
-               Our APP is developed by changsheng company, which is used to facilitate customers to reserve company venues and meetings. If you have any questions, please contact the company at 010-56789763
+               lineHeight:abc.w*.07,letterSpacing:1,
+              }}>Our APP is used to facilitate customers to make an appointment, quickly complete the registration in advance to avoid queuing, and make preparations in advance,If you have any questions, please contact 010-9871456
                </Text>
               </View> 
 

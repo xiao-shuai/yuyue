@@ -44,6 +44,14 @@ class Order extends Component{
        this.setState({b_index:index})
   }
    componentDidMount(){
+    fetch('https://easy-mock.com/mock/5d0106967850e766d04c7898/booking/fankui',{
+      method:'POST'
+    }).then(res=>res.json()).then(res=>{
+      
+    }
+    ).catch(err=>{
+
+    }) 
      this.today()
      console.log('aa',this.props.DataStore.order)
    }

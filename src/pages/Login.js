@@ -17,7 +17,7 @@ import {observer,inject} from 'mobx-react';
 import {abc} from '../styles/Met'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import DatePicker from 'react-native-datepicker';
-import {Avatar,Badge,Button,Input} from 'react-native-elements'
+import {Avatar,Badge,Button,Input,Overlay} from 'react-native-elements'
 import Toast from 'react-native-easy-toast'
 import ScrollableTabView, {DefaultTabBar, } from 'react-native-scrollable-tab-view';
 
@@ -27,7 +27,8 @@ class Login extends Component{
    constructor(props){
        super(props)
        this.state={
-          text:[]
+          text:[],
+          login_over:false
          
        }
        
@@ -46,13 +47,15 @@ go_submit=()=>{
    method:'POST',
  }).then(res=>res.json())
  .then(res=>{
-    AsyncStorage.setItem('yes','ok')
-     console.log('res:',res)
-     this.props.navigation.reset([NavigationActions.navigate({ routeName: 'DiBu' })], 0)
+  console.log('res:',res)
  })
  .catch(err=>{
      console.log('err:',err)
  })
+ 
+ AsyncStorage.setItem('yes','ok')
+ 
+ this.props.navigation.reset([NavigationActions.navigate({ routeName: 'DiBu' })], 0)
 
   
 }
@@ -69,14 +72,15 @@ go_submit2=()=>{
      method:'POST',
    }).then(res=>res.json())
    .then(res=>{
-       AsyncStorage.setItem('yes','ok')
        console.log('res:',res)
-       this.props.navigation.reset([NavigationActions.navigate({ routeName: 'DiBu' })], 0)
+      //  this.setState({login_over:false}) 
    })
    .catch(err=>{
        console.log('err:',err)
    })
-  
+
+   AsyncStorage.setItem('yes','ok')
+   this.props.navigation.reset([NavigationActions.navigate({ routeName: 'DiBu' })], 0)
     
   }
 
@@ -111,6 +115,7 @@ forgot=()=>{
         />
         <Button title={'Login'} style={{width:abc.w*.9,marginTop:20}} 
             onPress={()=>{
+              //  this.setState({login_over:true})
                 this.go_submit()
             }}
         />
@@ -153,7 +158,13 @@ forgot=()=>{
     </View>
 
   </ScrollableTabView>
-           
+
+  <Overlay isVisible={this.state.login_over} overlayStyle={{
+    height:abc.h*.05
+  }}>
+    <Text>logging in</Text>
+  </Overlay>
+            
      <Toast
 ref="Toast"
 position='top'

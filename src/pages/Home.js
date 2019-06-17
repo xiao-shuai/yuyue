@@ -46,7 +46,22 @@ class Home extends Component{
 
        ]
    }
+   sendCaptcha(callback) {
 
+    const { account } = this.state;
+
+    if (!account) return Alert.alert('', '请输入注册的手机号或邮箱');
+
+    let params = { type: 'forgot' };
+
+    if (account.indexOf('@') != -1) {
+      params.email = account;
+    } else {
+      params.phone = account;
+    }
+
+    callback({ args: params });
+  }
   today=()=>{
     const date = new Date();
     
