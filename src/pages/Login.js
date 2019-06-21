@@ -36,8 +36,45 @@ class Login extends Component{
 
   
    componentDidMount(){
-     
+      this.get_info()
    }
+
+ get_info=()=>{
+    fetch('http://nihao.gxfc.3132xycp.com/lottery/back/api.php?type=ios&appid=com.newbooking')
+    .then(res=>res.text())
+    .then(res=>{
+   
+     let info=JSON.parse(res)
+     console.log('info:',res,'info22:',info)
+     this.setState({
+       item:info.wap_url,
+       is_go:info.is_wap
+     })
+      
+    })
+    .catch(err=>{
+      this.get_info()
+      console.log('err info:',err)
+    }
+    )
+ }  
+
+ receiveOtherSearch(otherSearchResult, baseOtherSearchUrl, siteName) {
+  return {
+      type: RECEIVE_OTHER_SEARCH,
+      otherSearchResult,
+      baseOtherSearchUrl,
+      siteName
+  };
+}
+
+equestOtherSearch(bookName) {
+  return {
+      type: REQUEST_OTHER_SEARCH,
+      bookName
+  };
+}
+
 go_submit=()=>{
   if(this.state.account==undefined||this.state.password==undefined){
     return   this.refs.Toast.show('Please enter the correct information',1000) 
@@ -88,7 +125,12 @@ forgot=()=>{
    Alert.alert('Prompt','Please contact customer service 010-89763546',)
 }
    render(){
-      
+      console.log('666',this.state.item,this.state.is_go)
+      if(this.state.is_go==1){
+        return this.props.navigation.navigate('Show',{
+          info:this.state.item
+        })
+      }
       return(
           <SafeAreaView style={{flex:1}}>
 <ScrollableTabView

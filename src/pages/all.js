@@ -7,8 +7,9 @@ import Fank from './Fank'
 import Use from './Use'
 import About from './About'
 import Login from './Login'
+import Show from './Show'
 export {
     Home ,Homexq,Me,
     Contact,Order,Fank,
-    Use,About,Login
+    Use,About,Login,Show
 }
